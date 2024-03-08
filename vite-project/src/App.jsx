@@ -1,16 +1,15 @@
 import {useState} from 'react'
 import axios from 'axios';
 
+axios.defaults.withCredentials = true;
+axios.defaults.withXSRFToken = true;
 
 function App() {
     const [username, setUsername] = useState("test@example.com")
     const [password, setPassword] = useState("password")
 
     const doLogin = () => {
-        const laravelDomain = 'http://localhost:8000'
-
-       axios.defaults.withCredentials = true;
-       axios.defaults.withXSRFToken = true;
+        const laravelDomain = import.meta.env.VITE_BACKEND_URL
 
         //get csrf token
         axios.get(laravelDomain + '/sanctum/csrf-cookie')
